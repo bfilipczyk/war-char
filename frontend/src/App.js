@@ -1,5 +1,6 @@
 import './App.css';
 import Login from './login/Login';
+import Register from "./register/Register";
 import {
   BrowserRouter as Router,
   Switch,
@@ -12,6 +13,7 @@ function App() {
     <Router>
       <Switch>
         <Route path="/login" component={Login} />
+        <Route path="/register" component={Register} />
       </Switch>
     </Router>
   );
