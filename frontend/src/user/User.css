@@ -1,0 +1,26 @@
+.User.Main {
+    background: #2C2929FA 0 0 no-repeat padding-box;
+    border: 1px solid #707070;
+    border-radius: 20px;
+    opacity: 1;
+    padding: 1em;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    height: 30vh;
+}
+.container {
+    width: 100vw;
+    height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+.Logo {
+    height: 5%
+}

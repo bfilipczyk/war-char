@@ -1,4 +1,4 @@
-package com.example.warchar.controllers;
+package com.example.warchar.controller;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

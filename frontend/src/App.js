@@ -1,11 +1,11 @@
 import './App.css';
 import Login from './login/Login';
 import Register from "./register/Register";
+import User from "./user/User";
 import {
   BrowserRouter as Router,
   Switch,
-  Route,
-  Link
+  Route
 } from "react-router-dom";
 
 function App() {
@@ -14,6 +14,7 @@ function App() {
       <Switch>
         <Route path="/login" component={Login} />
         <Route path="/register" component={Register} />
+        <Route path="/user/:userId" component={User} />
       </Switch>
     </Router>
   );
