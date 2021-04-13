@@ -1,10 +1,9 @@
 package com.example.warchar.model;
 
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 public class Weapon {
@@ -13,17 +12,28 @@ public class Weapon {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name;
-    private String group;
+    private String weaponGroup;
     private String dmg;
+
+    @ManyToMany(mappedBy = "weaponSet")
+    private Set<WeaponQuality> weaponQualitySet = new HashSet<>();
+
+    @ManyToMany
+    @JoinTable(
+            name = "character_weapon",
+            joinColumns = @JoinColumn(name = "character_id"),
+            inverseJoinColumns = @JoinColumn(name = "weapon_id")
+    )
+    private Set<Character> characterSet = new HashSet<>();
 
     public Weapon(){
 
     }
 
-    public Weapon(Long id, String name, String group, String dmg) {
+    public Weapon(Long id, String name, String weaponGroup, String dmg) {
         this.id = id;
         this.name = name;
-        this.group = group;
+        this.weaponGroup = weaponGroup;
         this.dmg = dmg;
     }
 
@@ -43,12 +53,12 @@ public class Weapon {
         this.name = name;
     }
 
-    public String getGroup() {
-        return group;
+    public String getWeaponGroup() {
+        return weaponGroup;
     }
 
-    public void setGroup(String group) {
-        this.group = group;
+    public void setWeaponGroup(String weaponGroup) {
+        this.weaponGroup = weaponGroup;
     }
 
     public String getDmg() {
@@ -58,4 +68,21 @@ public class Weapon {
     public void setDmg(String dmg) {
         this.dmg = dmg;
     }
+
+    public Set<WeaponQuality> getWeaponQualitySet() {
+        return weaponQualitySet;
+    }
+
+    public void setWeaponQualitySet(Set<WeaponQuality> weaponQualitySet) {
+        this.weaponQualitySet = weaponQualitySet;
+    }
+
+    public Set<Character> getCharacterSet() {
+        return characterSet;
+    }
+
+    public void setCharacterSet(Set<Character> characterSet) {
+        this.characterSet = characterSet;
+    }
+
 }

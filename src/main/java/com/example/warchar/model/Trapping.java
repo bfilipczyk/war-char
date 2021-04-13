@@ -1,10 +1,9 @@
 package com.example.warchar.model;
 
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 public class Trapping {
@@ -12,6 +11,14 @@ public class Trapping {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name;
+
+    @ManyToMany
+    @JoinTable(
+            name = "character_trappings",
+            joinColumns = @JoinColumn(name = "character_id"),
+            inverseJoinColumns = @JoinColumn(name = "trapping_id")
+    )
+    private Set<Character> characterSet = new HashSet<>();
 
     public Trapping() {
     }
@@ -35,5 +42,13 @@ public class Trapping {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Set<Character> getCharacterSet() {
+        return characterSet;
+    }
+
+    public void setCharacterSet(Set<Character> characterSet) {
+        this.characterSet = characterSet;
     }
 }

@@ -1,13 +1,11 @@
 package com.example.warchar.model;
 
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.Set;
 
 @Entity
-public class User {
+public class Users {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -15,14 +13,16 @@ public class User {
     private String email;
     private String password;
 
-    public User() {
+    @OneToMany(mappedBy = "user")
+    private Set<Character> characterSet;
+
+    public Users() {
 
     }
 
-    public User(Long id, String email, String password) {
+    public Users(Long id, String email, String password) {
         this.id = id;
         this.email = email;
-        this.password = password;
     }
 
     public Long getId() {

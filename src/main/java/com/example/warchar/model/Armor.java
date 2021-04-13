@@ -1,9 +1,8 @@
 package com.example.warchar.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 public class Armor {
@@ -13,6 +12,17 @@ public class Armor {
     private String name;
     private String location;
     private int armorPoints;
+
+    @ManyToMany(mappedBy = "armorSet")
+    private Set<ArmorQuality> armorQualitySet = new HashSet<>();
+
+    @ManyToMany
+    @JoinTable(
+            name = "character_armor",
+            joinColumns = @JoinColumn(name = "character_id"),
+            inverseJoinColumns = @JoinColumn(name = "armor_id")
+    )
+    private Set<Character> characterSet = new HashSet<>();
 
     public Armor () {
 
@@ -54,5 +64,21 @@ public class Armor {
 
     public void setArmorPoints(int armorPoints) {
         this.armorPoints = armorPoints;
+    }
+
+    public Set<ArmorQuality> getArmorQualitySet() {
+        return armorQualitySet;
+    }
+
+    public void setArmorQualitySet(Set<ArmorQuality> armorQualitySet) {
+        this.armorQualitySet = armorQualitySet;
+    }
+
+    public Set<Character> getCharacterSet() {
+        return characterSet;
+    }
+
+    public void setCharacterSet(Set<Character> characterSet) {
+        this.characterSet = characterSet;
     }
 }

@@ -1,10 +1,8 @@
 package com.example.warchar.model;
 
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 public class Talent {
@@ -12,6 +10,9 @@ public class Talent {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String description;
+
+    @OneToMany(mappedBy = "talent")
+    Set<CharacterTalents> characterTalentsSet;
 
     public Talent () {
 
@@ -35,5 +36,13 @@ public class Talent {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Set<CharacterTalents> getCharacterTalentsSet() {
+        return characterTalentsSet;
+    }
+
+    public void setCharacterTalentsSet(Set<CharacterTalents> characterTalentsSet) {
+        this.characterTalentsSet = characterTalentsSet;
     }
 }
