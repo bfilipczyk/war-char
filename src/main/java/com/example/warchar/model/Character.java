@@ -25,10 +25,12 @@ public class Character {
     private Set<Trapping> trappingSet = new HashSet<>();
 
     @ManyToMany(mappedBy = "characterSet")
-    private Set<Armor> armorSet = new HashSet<>();
+    private Set<Weapon> weaponSet = new HashSet<>();
 
     @ManyToMany(mappedBy = "characterSet")
-    private Set<Weapon> weaponSet = new HashSet<>();
+    private Set<Armor> armorSet = new HashSet<>();
+
+
 
     @ManyToOne
     @JoinColumn(name = "user_id")
