@@ -27,12 +27,6 @@ public class Armor {
     public Armor () {
 
     }
-    public Armor(Long id, String name, String location, int armorPoints) {
-        this.id = id;
-        this.name = name;
-        this.location = location;
-        this.armorPoints = armorPoints;
-    }
 
     public Long getId() {
         return id;

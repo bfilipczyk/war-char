@@ -9,17 +9,9 @@ public class WeaponQuality {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String descrition;
-
-    public WeaponQuality(Long id, String descrition) {
-        this.id = id;
-        this.descrition = descrition;
-    }
-
-
-    public WeaponQuality() {
-
-    }
+    private String name;
+    @Lob
+    private String description;
 
     @ManyToMany
     @JoinTable(
@@ -29,6 +21,10 @@ public class WeaponQuality {
     )
     private Set<Weapon> weaponSet = new HashSet<>();
 
+    public WeaponQuality() {
+
+    }
+
     public Long getId() {
         return id;
     }
@@ -37,12 +33,20 @@ public class WeaponQuality {
         this.id = id;
     }
 
-    public String getDescrition() {
-        return descrition;
+    public String getName() {
+        return name;
     }
 
-    public void setDescrition(String descrition) {
-        this.descrition = descrition;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String descrition) {
+        this.description = descrition;
     }
 
     public Set<Weapon> getWeaponSet() {

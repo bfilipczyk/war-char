@@ -9,17 +9,10 @@ public class ArmorQuality {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String descrition;
 
-    public ArmorQuality(Long id, String descrition) {
-        this.id = id;
-        this.descrition = descrition;
-    }
-
-
-    public ArmorQuality() {
-
-    }
+    private String name;
+    @Lob
+    private String description;
 
     @ManyToMany
     @JoinTable(
@@ -29,6 +22,10 @@ public class ArmorQuality {
     )
     private Set<Armor> armorSet = new HashSet<>();
 
+    public ArmorQuality() {
+
+    }
+
     public Long getId() {
         return id;
     }
@@ -37,12 +34,20 @@ public class ArmorQuality {
         this.id = id;
     }
 
-    public String getDescrition() {
-        return descrition;
+    public String getName() {
+        return name;
     }
 
-    public void setDescrition(String descrition) {
-        this.descrition = descrition;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String descrition) {
+        this.description = descrition;
     }
 
     public Set<Armor> getArmorSet() {

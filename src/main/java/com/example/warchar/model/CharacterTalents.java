@@ -4,16 +4,14 @@ import javax.persistence.*;
 
 @Entity
 public class CharacterTalents {
-    @EmbeddedId
-    CharacterTalentsId id;
+    @Id
+    Long id;
 
     @ManyToOne
-    @MapsId("characterId")
     @JoinColumn(name = "character_id")
     Character character;
 
     @ManyToOne
-    @MapsId("talentId")
     @JoinColumn(name = "talent_id")
     Talent talent;
 
@@ -22,11 +20,11 @@ public class CharacterTalents {
     public CharacterTalents() {
     }
 
-    public CharacterTalentsId getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(CharacterTalentsId id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

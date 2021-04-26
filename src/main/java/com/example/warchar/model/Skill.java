@@ -11,6 +11,9 @@ public class Skill {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
+    private String name;
+    @Lob
     private String description;
     private String type;
     private String attribute;
@@ -21,12 +24,6 @@ public class Skill {
     public Skill(){
 
     }
-    public Skill(Long id, String description, String type, String attribute){
-        this.id = id;
-        this.description = description;
-        this.type = type;
-        this.attribute = attribute;
-    }
 
     public Long getId() {
         return id;
@@ -34,6 +31,14 @@ public class Skill {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getDescription() {
