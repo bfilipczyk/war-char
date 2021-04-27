@@ -1,9 +1,15 @@
 package com.example.warchar.model;
 
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import java.util.Set;
 
+
+@Data
+@NoArgsConstructor
 @Entity
 public class Talent {
     @Id
@@ -17,39 +23,4 @@ public class Talent {
     @OneToMany(mappedBy = "talent")
     Set<CharacterTalents> characterTalentsSet;
 
-    public Talent () {
-
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public Set<CharacterTalents> getCharacterTalentsSet() {
-        return characterTalentsSet;
-    }
-
-    public void setCharacterTalentsSet(Set<CharacterTalents> characterTalentsSet) {
-        this.characterTalentsSet = characterTalentsSet;
-    }
 }

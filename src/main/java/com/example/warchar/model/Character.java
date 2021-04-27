@@ -2,12 +2,16 @@ package com.example.warchar.model;
 
 
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
 
-
+@Data
+@NoArgsConstructor
 @Entity
 public class Character {
 
@@ -25,84 +29,29 @@ public class Character {
     @OneToMany(mappedBy = "character")
     Set<CharacterTalents> characterTalentsSet;
 
-    @ManyToMany(mappedBy = "characterSet")
+    @ManyToMany
+    @JoinTable(
+            name = "character_trapping",
+            joinColumns = @JoinColumn(name = "character_id"),
+            inverseJoinColumns = @JoinColumn(name = "trapping_id"))
     private Set<Trapping> trappingSet = new HashSet<>();
 
-    @ManyToMany(mappedBy = "characterSet")
+    @ManyToMany
+    @JoinTable(
+            name = "character_weapons",
+            joinColumns = @JoinColumn(name = "character_id"),
+            inverseJoinColumns = @JoinColumn(name = "weapon_id"))
     private Set<Weapon> weaponSet = new HashSet<>();
 
-    @ManyToMany(mappedBy = "characterSet")
+    @ManyToMany
+    @JoinTable(
+            name = "character_armor",
+            joinColumns = @JoinColumn(name = "character_id"),
+            inverseJoinColumns = @JoinColumn(name = "armor_id"))
     private Set<Armor> armorSet = new HashSet<>();
-
-
 
     @ManyToOne
     @JoinColumn(name = "user_id")
     private Users user;
-    public Character() {
-    }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Characteristics getCharacteristics() {
-        return characteristics;
-    }
-
-    public void setCharacteristics(Characteristics characteristics) {
-        this.characteristics = characteristics;
-    }
-
-    public Set<CharacterSkills> getCharacterSkillsSet() {
-        return characterSkillsSet;
-    }
-
-    public void setCharacterSkillsSet(Set<CharacterSkills> characterSkillsSet) {
-        this.characterSkillsSet = characterSkillsSet;
-    }
-
-    public Set<CharacterTalents> getCharacterTalentsSet() {
-        return characterTalentsSet;
-    }
-
-    public void setCharacterTalentsSet(Set<CharacterTalents> characterTalentsSet) {
-        this.characterTalentsSet = characterTalentsSet;
-    }
-
-    public Set<Trapping> getTrappingSet() {
-        return trappingSet;
-    }
-
-    public void setTrappingSet(Set<Trapping> trappingSet) {
-        this.trappingSet = trappingSet;
-    }
-
-    public Set<Armor> getArmorSet() {
-        return armorSet;
-    }
-
-    public void setArmorSet(Set<Armor> armorSet) {
-        this.armorSet = armorSet;
-    }
-
-    public Set<Weapon> getWeaponSet() {
-        return weaponSet;
-    }
-
-    public void setWeaponSet(Set<Weapon> weaponSet) {
-        this.weaponSet = weaponSet;
-    }
 }

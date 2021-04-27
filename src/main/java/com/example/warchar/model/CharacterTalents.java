@@ -1,7 +1,13 @@
 package com.example.warchar.model;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 
+
+@Data
+@NoArgsConstructor
 @Entity
 public class CharacterTalents {
     @Id
@@ -17,38 +23,4 @@ public class CharacterTalents {
 
     int advances;
 
-    public CharacterTalents() {
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Character getCharacter() {
-        return character;
-    }
-
-    public void setCharacter(Character character) {
-        this.character = character;
-    }
-
-    public Talent getTalent() {
-        return talent;
-    }
-
-    public void setTalent(Talent talent) {
-        this.talent = talent;
-    }
-
-    public int getAdvances() {
-        return advances;
-    }
-
-    public void setAdvances(int advances) {
-        this.advances = advances;
-    }
 }
