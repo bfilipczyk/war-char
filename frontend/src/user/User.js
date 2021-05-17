@@ -1,12 +1,14 @@
 import logo from "../assets/logo.png";
 import './User.css';
 function User() {
+
+
     return (
-        <div className="user-container">
+        <div className="userContainer">
             <div className="Logo">
                 <img src={logo}/>
             </div>
-            <div className="Main">
+            <div className="userMain">
                 kot
             </div>
         </div>
