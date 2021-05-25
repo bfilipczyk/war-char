@@ -3,28 +3,37 @@ import logo from "../assets/logo.png";
 import axios from "axios";
 import "./Armor.css";
 import {Table} from "antd";
+import {useHistory} from "react-router";
 
 
 export default function Armor(){
 
     const [armor,setArmor] =  useState(null);
+    let history = useHistory();
 
     useEffect(()=>{
-        if(!armor)
+        if(localStorage.getItem('user')==null)
+        {
+            history.push('/');
+        }
+        if(!armor && localStorage.getItem('user')!=null)
         {
             fetchDataArmor();
         }
         }
     )
     const fetchDataArmor = async () => {
+
+        const user = JSON.parse(localStorage.getItem('user'))
+
+
         const response = await axios.get("/api/armor",
             {
                 headers:
                     {
-                        Authorization: 'Bearer'
+                        Authorization:'Bearer '+ user.accessToken
                     }
             });
-        console.log(response.data)
         setArmor(response.data)
     }
     const columns = [
@@ -50,7 +59,7 @@ export default function Armor(){
                 <img src={logo} alt="error"/>
             </div>
             <div className="armorMain">
-                <Table columns={columns} dataSource={armor} size="small" pagination={false} />
+                <Table columns={columns} dataSource={armor} size="small" rowKey="name" pagination={false} />
             </div>
         </div>
     )
