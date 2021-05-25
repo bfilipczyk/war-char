@@ -1,8 +1,7 @@
 import './Register.css';
 import logo from '../assets/logo.png';
-import { Input, Form } from "informed";
+import { Input } from "informed";
 import {useState} from "react";
-import BASE_API_URL from "../const/const";
 import {useHistory} from "react-router";
 import axios from "axios";
 
@@ -51,7 +50,7 @@ function Register() {
     return (
         <div className="register-container">
             <div className="Logo">
-                <img src={logo}/>
+                <img src={logo} alt="error"/>
             </div>
             <div className="Main">
                 <form onSubmit={handleSubmit} className="register-form">

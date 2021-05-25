@@ -17,7 +17,13 @@ export default function Armor(){
         }
     )
     const fetchDataArmor = async () => {
-        const response = await axios.get("/api/armor");
+        const response = await axios.get("/api/armor",
+            {
+                headers:
+                    {
+                        Authorization: 'Bearer'
+                    }
+            });
         console.log(response.data)
         setArmor(response.data)
     }
@@ -41,7 +47,7 @@ export default function Armor(){
     return (
         <div className="armorContainer">
             <div className="Logo">
-                <img src={logo}/>
+                <img src={logo} alt="error"/>
             </div>
             <div className="armorMain">
                 <Table columns={columns} dataSource={armor} size="small" pagination={false} />

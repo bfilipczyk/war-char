@@ -4,7 +4,6 @@ import { Input } from "informed";
 import {useState} from "react";
 import {useHistory} from "react-router";
 import {Link} from "react-router-dom";
-import BASE_API_URL from "../const/const";
 import axios from "axios";
 
 
@@ -18,14 +17,20 @@ function Login() {
     let history = useHistory();
 
     const handleSubmit = async e => {
-        axios.post(`${BASE_API_URL}/auth/login`, {email,password})
+        e.preventDefault()
+        console.log("pies");
+        await axios.post(`api/auth/login`, {email,password})
             .then((response) => {
-                console.log(response.headers.authorization);
-                history.push('/');
+                console.log(response);
+                if (response.data.accessToken) {
+                    localStorage.setItem("user", JSON.stringify(response.data));
+                }
+                history.push('/armor');
             })
             .catch(() => {
                 setErrorMessage(() => ({ message: 'No account found with provided credentials' }));
             });
+
     }
 
 
@@ -34,7 +39,7 @@ function Login() {
     return (
         <div className="login-container">
             <div className="Logo">
-                <img src={logo}/>
+                <img src={logo} alt="error"/>
             </div>
             <div className="Main">
                 <form onSubmit={handleSubmit} className="login-form">

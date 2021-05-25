@@ -6,7 +6,7 @@ function User() {
     return (
         <div className="userContainer">
             <div className="Logo">
-                <img src={logo}/>
+                <img src={logo} alt="error"/>
             </div>
             <div className="userMain">
                 kot
