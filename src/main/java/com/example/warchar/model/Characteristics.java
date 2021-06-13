@@ -1,18 +1,22 @@
 package com.example.warchar.model;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.*;
 
 import javax.persistence.*;
 
 
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @Entity
 public class Characteristics {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @OneToOne(mappedBy = "characteristics")
+    @JsonIgnore
+    private Character character;
     private int weaponSkill;
     private int ballisticSkill;
     private int strength;

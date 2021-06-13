@@ -1,4 +1,4 @@
-.armorMain {
+.weaponMain {
     background: #2C2929FA 0 0 no-repeat padding-box;
     border: 1px solid #707070;
     border-radius: 20px;
@@ -12,7 +12,7 @@
 
     color: white;
 }
-.armorContainer {
+.weaponContainer {
     width: 100vw;
     height: 100vh;
 
@@ -22,15 +22,6 @@
     align-items: center;
 
 }
-.armorPart {
+.weaponPart {
     display: flex;
-}
-
-.armorButton {
-    background-color: #B53A3A;
-    align-self: center;
-    font-family: 'Segoe UI', sans-serif;
-    width: 200px;
-    margin: 0.5em;
-
 }

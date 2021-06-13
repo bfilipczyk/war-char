@@ -18,17 +18,16 @@ function Login() {
 
     const handleSubmit = async e => {
         e.preventDefault()
-        console.log("pies");
         await axios.post(`api/auth/login`, {email,password})
             .then((response) => {
                 console.log(response);
                 if (response.data.accessToken) {
                     localStorage.setItem("user", JSON.stringify(response.data));
                 }
-                history.push('/armor');
+                history.push('/home');
             })
             .catch(() => {
-                setErrorMessage(() => ({ message: 'No account found with provided credentials' }));
+                setErrorMessage(() => ('No account found with provided credentials'));
             });
 
     }

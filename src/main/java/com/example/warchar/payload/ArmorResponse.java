@@ -3,8 +3,6 @@ package com.example.warchar.payload;
 import com.example.warchar.model.Armor;
 import lombok.Data;
 
-import java.util.ArrayList;
-import java.util.List;
 
 @Data
 public class ArmorResponse {

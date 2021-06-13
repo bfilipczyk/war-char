@@ -2,15 +2,19 @@ package com.example.warchar.model;
 
 
 
-import lombok.Data;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
 
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @Entity
 public class Character {
@@ -24,9 +28,11 @@ public class Character {
     private Characteristics characteristics;
 
     @OneToMany(mappedBy = "character")
+    @JsonIgnore
     Set<CharacterSkills> characterSkillsSet;
 
     @OneToMany(mappedBy = "character")
+    @JsonIgnore
     Set<CharacterTalents> characterTalentsSet;
 
     @ManyToMany
@@ -50,8 +56,9 @@ public class Character {
             inverseJoinColumns = @JoinColumn(name = "armor_id"))
     private Set<Armor> armorSet = new HashSet<>();
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
+    @JsonBackReference(value = "users")
     private Users user;
 
 }

@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import logo from "../assets/logo.png";
 import axios from "axios";
 import "./Armor.css";
-import {Table} from "antd";
+import {Button, Table} from "antd";
 import {useHistory} from "react-router";
 
 
@@ -59,7 +59,8 @@ export default function Armor(){
                 <img src={logo} alt="error"/>
             </div>
             <div className="armorMain">
-                <Table columns={columns} dataSource={armor} size="small" rowKey="name" pagination={false} />
+                <Table columns={columns} dataSource={armor} size="small" rowKey="name"  pagination={false} />
+                <Button className="armorButton" onClick={()=>history.push("/home")} >Home</Button>
             </div>
         </div>
     )

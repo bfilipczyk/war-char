@@ -1,15 +1,15 @@
 package com.example.warchar.model;
 
 
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.Set;
 
 
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @Entity
 public class Users {
@@ -21,6 +21,7 @@ public class Users {
     private String password;
 
     @OneToMany(mappedBy = "user")
+    @JsonManagedReference(value = "users")
     private Set<Character> characterSet;
 
 

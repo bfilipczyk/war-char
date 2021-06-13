@@ -1,14 +1,16 @@
 package com.example.warchar.model;
 
-import lombok.Data;
+import lombok.Data;import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
 
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @Entity
 public class WeaponQuality {
