@@ -2,6 +2,7 @@ package com.example.warchar.service;
 
 import com.example.warchar.model.Character;
 import com.example.warchar.model.Characteristics;
+import com.example.warchar.payload.CharacteristicsRequest;
 import com.example.warchar.payload.CharactersResponse;
 import com.example.warchar.payload.NewCharacterRequest;
 import com.example.warchar.repository.CharacterRepository;
@@ -61,5 +62,23 @@ public class CharactersService {
         character.setTrappingSet(null);
 
         return characterRepository.save(character);
+    }
+
+    public Characteristics updateCharacteristics(CharacteristicsRequest characteristicsRequest, long characteristicsId) throws NotFoundException {
+        return characteristicsRepository.findById(characteristicsId)
+                .map(characteristics -> {
+                    characteristics.setWeaponSkill(characteristicsRequest.getWeaponSkill());
+                    characteristics.setBallisticSkill(characteristicsRequest.getBallisticSkill());
+                    characteristics.setStrength(characteristicsRequest.getStrength());
+                    characteristics.setToughness(characteristicsRequest.getToughness());
+                    characteristics.setInitiative(characteristicsRequest.getInitiative());
+                    characteristics.setAgility(characteristicsRequest.getAgility());
+                    characteristics.setDexterity(characteristicsRequest.getDexterity());
+                    characteristics.setIntelligence(characteristicsRequest.getIntelligence());
+                    characteristics.setWillpower(characteristicsRequest.getWillpower());
+                    characteristics.setFellowship(characteristicsRequest.getFellowship());
+                    return characteristicsRepository.save(characteristics);
+                })
+                .orElseThrow(() -> new NotFoundException("Characteristics with id: " + characteristicsId + " not found"));
     }
 }

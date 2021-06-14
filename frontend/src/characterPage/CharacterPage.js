@@ -3,41 +3,49 @@ import logo from "../assets/logo.png";
 import "./CharacterPage.css"
 import {Button, Table} from "antd";
 import axios from "axios";
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import Characteristics from "./characteristics/Characteristics";
 
 
 function CharacterPage() {
     let history = useHistory();
     let characterId = useParams().characterId;
+    const [character,setCharacter] = useState()
+    const [loading, setLoading]= useState(true)
 
 
-    let character = null;
 
     useEffect(()=> {
         if(localStorage.getItem('user')==null)
         {
             history.push('/');
         }
-        if(character===null && localStorage.getItem('user')!=null)
+        if(!character && localStorage.getItem('user')!=null)
         {
+            setLoading(true)
             fetchCharacter();
-            console.log(1)
 
         }
     })
+
+
     const fetchCharacter= async () => {
         const user = JSON.parse(localStorage.getItem('user'))
 
-        await axios.get("/api/characters/character/"+characterId,
+        const response = await axios.get("/api/characters/character/"+characterId,
             {
                 headers:
                     {
                         Authorization:'Bearer '+ user.accessToken
                     }
-            }).then(response => {character=response});
+            })
+        setLoading(false)
+        setCharacter(response.data)
+
+
 
     }
+
 
     return(
         <div className="characterContainer">
@@ -45,11 +53,25 @@ function CharacterPage() {
                 <img src={logo} alt="error"/>
             </div>
             <div className="characterMain">
-                <Button onClick={()=>{console.log(character.data)}} >Click</Button>
-                <Characteristics characteristics={character} />
+                {!loading?
+                    <div>
+                        {typeof character != "undefined"?
+                        <div>
+                            <h1>{character.name}</h1>
+                        </div>
+                        :
+                        <div/>}
+                        <Characteristics character={character} />
+                    </div>
+                    :
+                    <div>
+                        Loading
+                    </div>
+                }
             </div>
         </div>
     )
+
 
 }
 

@@ -52,7 +52,6 @@ function Home() {
                     }
             }
             ).then((response) => {
-            console.log(response);
             })
 
     }
