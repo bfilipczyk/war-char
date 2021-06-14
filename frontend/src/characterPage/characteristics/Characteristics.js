@@ -25,7 +25,7 @@ export default function Characteristics(props){
         <div>
             {characteristics!=null?
                 <div>
-                <h3>Characteristics:</h3>
+                <h3 align={"center"}>Characteristics:</h3>
                 <Form className="characteristicsForm" onSubmit={update}>
                     <div className="characteristicsFormDiv">
                         <div className="characteristicsFormDivCtrl">

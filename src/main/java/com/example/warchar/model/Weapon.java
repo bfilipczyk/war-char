@@ -2,6 +2,7 @@ package com.example.warchar.model;
 
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -30,9 +31,11 @@ public class Weapon {
             name = "weapon_qualities",
             joinColumns = @JoinColumn(name = "weapon_id"),
             inverseJoinColumns = @JoinColumn(name = "quality_id"))
+    @JsonIgnore
     private Set<WeaponQuality> weaponQualitySet = new HashSet<>();
 
     @ManyToMany(mappedBy = "weaponSet")
+    @JsonIgnore
     private Set<Character> characterSet = new HashSet<>();
 
 

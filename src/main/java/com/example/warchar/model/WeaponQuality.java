@@ -1,5 +1,6 @@
 package com.example.warchar.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -22,6 +23,7 @@ public class WeaponQuality {
     private String description;
 
     @ManyToMany(mappedBy = "weaponQualitySet")
+    @JsonIgnore
     private Set<Weapon> weaponSet = new HashSet<>();
 
 
