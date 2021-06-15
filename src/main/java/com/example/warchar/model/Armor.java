@@ -1,5 +1,6 @@
 package com.example.warchar.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -26,6 +27,7 @@ public class Armor {
     private Set<ArmorQuality> armorQualitySet = new HashSet<>();
 
     @ManyToMany(mappedBy = "armorSet")
+    @JsonIgnore
     private Set<Character> characterSet = new HashSet<>();
 
 }

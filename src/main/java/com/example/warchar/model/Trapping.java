@@ -2,6 +2,7 @@ package com.example.warchar.model;
 
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -22,6 +23,7 @@ public class Trapping {
     private String name;
 
     @ManyToMany(mappedBy = "trappingSet")
+    @JsonIgnore
     private Set<Character> characterSet = new HashSet<>();
 
 }

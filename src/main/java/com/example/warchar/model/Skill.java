@@ -2,6 +2,7 @@ package com.example.warchar.model;
 
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -20,12 +21,12 @@ public class Skill {
     private Long id;
 
     private String name;
-    @Lob
     private String description;
     private String type;
     private String attribute;
 
     @OneToMany(mappedBy = "skill")
+    @JsonIgnore
     Set<CharacterSkills> characterSkillsSet;
 
 }

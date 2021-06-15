@@ -1,5 +1,6 @@
 package com.example.warchar.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,11 +19,11 @@ public class ArmorQuality {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name;
-    @Lob
     private String description;
 
 
     @ManyToMany(mappedBy = "armorQualitySet")
+    @JsonIgnore
     private Set<Armor> armorSet = new HashSet<>();
 
 

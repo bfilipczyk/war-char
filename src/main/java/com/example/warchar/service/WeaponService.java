@@ -2,7 +2,7 @@ package com.example.warchar.service;
 
 import com.example.warchar.model.Character;
 import com.example.warchar.model.Weapon;
-import com.example.warchar.payload.RemoveCharacterWeaponRequest;
+import com.example.warchar.payload.RemoveCharacterDataRequest;
 import com.example.warchar.payload.WeaponResponse;
 import com.example.warchar.repository.*;
 import javassist.NotFoundException;
@@ -21,9 +21,9 @@ public class WeaponService {
     private final WeaponQualityRepository weaponQualityRepository;
     private final CharacterRepository characterRepository;
 
-    public Weapon removeCharacterWeapon(RemoveCharacterWeaponRequest request) throws NotFoundException {
+    public Weapon removeCharacterWeapon(RemoveCharacterDataRequest request) throws NotFoundException {
         Character character = characterRepository.findById(request.getCharacterId()).orElseThrow(() -> new NotFoundException("Character with id: " + request.getCharacterId() + " not found"));
-        Weapon weapon = weaponRepository.findById(request.getWeaponId()).orElseThrow(() -> new NotFoundException("Weapon with id: " + request.getWeaponId() + " not found"));
+        Weapon weapon = weaponRepository.findById(request.getDataId()).orElseThrow(() -> new NotFoundException("Weapon with id: " + request.getDataId() + " not found"));
         Set<Character> weaponCharacters = weapon.getCharacterSet();
         Set<Weapon> charactersWeapons = character.getWeaponSet();
         weaponCharacters.remove(character);

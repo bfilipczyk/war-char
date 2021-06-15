@@ -31,7 +31,6 @@ public class Weapon {
             name = "weapon_qualities",
             joinColumns = @JoinColumn(name = "weapon_id"),
             inverseJoinColumns = @JoinColumn(name = "quality_id"))
-    @JsonIgnore
     private Set<WeaponQuality> weaponQualitySet = new HashSet<>();
 
     @ManyToMany(mappedBy = "weaponSet")

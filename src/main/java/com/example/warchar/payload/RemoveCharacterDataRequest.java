@@ -3,7 +3,7 @@ package com.example.warchar.payload;
 import lombok.Getter;
 
 @Getter
-public class RemoveCharacterWeaponRequest {
+public class RemoveCharacterDataRequest {
     private long characterId;
-    private long weaponId;
+    private long dataId;
 }

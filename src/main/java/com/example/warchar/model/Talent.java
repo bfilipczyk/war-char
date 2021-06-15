@@ -2,6 +2,7 @@ package com.example.warchar.model;
 
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -20,10 +21,10 @@ public class Talent {
     private Long id;
 
     private String name;
-    @Lob
     private String description;
 
     @OneToMany(mappedBy = "talent")
+    @JsonIgnore
     Set<CharacterTalents> characterTalentsSet;
 
 }

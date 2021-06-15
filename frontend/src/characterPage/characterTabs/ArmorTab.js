@@ -4,18 +4,18 @@ import "./Tabs.css"
 import axios from "axios";
 
 
-export default function WeaponTab(props){
+export default function ArmorTab(props){
     const user = JSON.parse(localStorage.getItem('user'))
-    const [weaponSet,setWeaponSet] = useState(null)
+    const [armorSet,setArmorSet] = useState(null)
     const [characterId,setCharacterId] = useState(null)
-    if(props.weaponSet && weaponSet===null) {
-        setWeaponSet(props.weaponSet)
+    if(props.armorSet && armorSet===null) {
+        setArmorSet(props.armorSet)
         setCharacterId(props.characterId)
     }
 
     const remove = async (id)=> {
         let dataId = id
-        await axios.patch("/api/weapon/removeCharacterWeapon",{characterId,dataId},
+        await axios.patch("/api/armor/removeCharacterArmor",{characterId,dataId},
             {
                 headers:
                     {
@@ -28,36 +28,19 @@ export default function WeaponTab(props){
     }
     const columns = [
         {
-            title: 'Weapon',
-            render: (record) => (
-                <React.Fragment>
-                    {record.name}
-                    <br/>
-                    {record.dmg}
-                    <br/>
-                    {record.weaponGroup}
-                    <br/>
-                </React.Fragment>
-            ),
-            responsive: ["xs"]
-        },
-        {
             title: 'Name',
             dataIndex: 'name',
-            key: 'name',
-            responsive: ["sm"]
+            key: 'name'
         },
         {
-            title: 'Dmg',
-            dataIndex: 'dmg',
-            key: 'dmg',
-            responsive: ["sm"]
+            title: 'Location',
+            dataIndex: 'location',
+            key: 'location'
         },
         {
-            title: 'Weapon Group',
-            dataIndex: 'weaponGroup',
-            key: 'weaponGroup',
-            responsive: ["sm"]
+            title: 'Armor Points',
+            dataIndex: 'armorPoints',
+            key: 'armorPoints'
         },
         {
             key:'action',
@@ -73,8 +56,8 @@ export default function WeaponTab(props){
 
     return(
         <div>
-            {weaponSet!=null ?
-                <Table columns={columns} dataSource={weaponSet} size="small" rowKey="name" pagination={false}/>
+            {armorSet!=null ?
+                <Table columns={columns} dataSource={armorSet} size="small" rowKey="name" pagination={false}/>
                 :
                 <div/>
             }

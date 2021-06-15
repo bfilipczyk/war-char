@@ -3,12 +3,11 @@ package com.example.warchar.controller;
 
 
 import com.example.warchar.model.Weapon;
-import com.example.warchar.payload.RemoveCharacterWeaponRequest;
+import com.example.warchar.payload.RemoveCharacterDataRequest;
 import com.example.warchar.payload.WeaponResponse;
 import com.example.warchar.service.WeaponService;
 import javassist.NotFoundException;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,7 +24,7 @@ public class WeaponController {
     }
 
     @PatchMapping("/removeCharacterWeapon")
-    Weapon removeCharacterWeapon(@RequestBody RemoveCharacterWeaponRequest request) throws NotFoundException {
+    Weapon removeCharacterWeapon(@RequestBody RemoveCharacterDataRequest request) throws NotFoundException {
         return weaponService.removeCharacterWeapon(request);
     }
 }

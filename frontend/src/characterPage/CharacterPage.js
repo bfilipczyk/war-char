@@ -5,21 +5,55 @@ import axios from "axios";
 import React, {useEffect, useState} from "react";
 import Characteristics from "./characteristics/Characteristics";
 import ArmorPoints from "./armorPoints/ArmorPoints";
-import {AppBar, Box, Button, Tab, Tabs, Typography} from "@material-ui/core";
+import {AppBar, Box, Tab, Tabs, Typography} from "@material-ui/core";
 import TabContext from '@material-ui/lab/TabContext';
 import TabList from '@material-ui/lab/TabList';
-import TabPanel from '@material-ui/lab/TabPanel';
-import {Table} from "antd";
 import WeaponTab from "./characterTabs/WeaponTab";
+import ArmorTab from "./characterTabs/ArmorTab";
+import TrappingTab from "./characterTabs/TrappingTab";
+import SkillTab from "./characterTabs/SkillTab";
+import PropTypes from "prop-types";
+import TalentTab from "./characterTabs/TalentTab";
 
+
+function TabPanel(props) {
+    const { children, value, index, ...other } = props;
+
+    return (
+        <div
+            role="tabpanel"
+            hidden={value !== index}
+            id={`scrollable-force-tabpanel-${index}`}
+            aria-labelledby={`scrollable-force-tab-${index}`}
+            {...other}
+        >
+            {value === index && (
+                <Typography component={"span"}>{children}</Typography>
+            )}
+        </div>
+    );
+}
+
+TabPanel.propTypes = {
+    children: PropTypes.node,
+    index: PropTypes.any.isRequired,
+    value: PropTypes.any.isRequired,
+};
+
+function a11yProps(index) {
+    return {
+        id: `scrollable-force-tab-${index}`,
+        'aria-controls': `scrollable-force-tabpanel-${index}`,
+    };
+}
 
 function CharacterPage() {
     let history = useHistory();
     let characterId = useParams().characterId;
     const [character,setCharacter] = useState()
     const [loading, setLoading]= useState(true)
-    const [value, setValue] = React.useState('1');
-    const [value2, setValue2] = React.useState('1');
+    const [value, setValue] = React.useState(0);
+    const [value2, setValue2] = React.useState(0);
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
@@ -63,7 +97,7 @@ function CharacterPage() {
             </div>
             <div className="characterMain">
                 {!loading?
-                    <div>
+                    <div className="characterDiv">
                         {typeof character != "undefined"?
                         <div>
                             <h1 align={"center"}>{character.name}</h1>
@@ -73,47 +107,72 @@ function CharacterPage() {
                         <Characteristics character={character} />
                         <ArmorPoints/>
                         <div>
-                            <TabContext value={value}>
                                 <AppBar position="static">
-                                    <TabList onChange={handleChange}>
-                                        <Tab label="Items" value="1" />
-                                        <Tab label="Skills" value="2" />
-                                        <Tab label="Talents" value="3" />
-                                    </TabList>
+                                    <Tabs
+                                        value={value}
+                                        onChange={handleChange}
+                                        variant="scrollable"
+                                        scrollButtons="on"
+                                        indicatorColor="secondary"
+                                        color="secondary"
+                                        aria-label="scrollable force tabs example"
+                                    >
+                                        <Tab label="Items" {...a11yProps(0)} />
+                                        <Tab label="Skills" {...a11yProps(1)}/>
+                                        <Tab label="Talents" {...a11yProps(2)}/>
+                                    </Tabs>
                                 </AppBar>
-                                <TabPanel  value="1">
-                                    <TabContext value={value2}>
+                                <TabPanel  value={value} index={0}>
                                         <AppBar position="static">
-                                            <TabList onChange={handleChange2}>
-                                                <Tab label="Weapons" value="1" />
-                                                <Tab label="Armors" value="2" />
-                                                <Tab label="Trapping" value="3" />
-                                            </TabList>
+                                            <Tabs
+                                                value={value2}
+                                                onChange={handleChange2}
+                                                variant="scrollable"
+                                                scrollButtons="on"
+                                                indicatorColor="secondary"
+                                                aria-label="scrollable force tabs example"
+                                            >
+                                                <Tab label="Weapons" {...a11yProps(0)} />
+                                                <Tab label="Armors" {...a11yProps(1)}/>
+                                                <Tab label="Trapping" {...a11yProps(2)}/>
+                                            </Tabs>
                                         </AppBar>
-                                        <TabPanel value="1">
-
+                                        <TabPanel value={value} index={0}>
                                             {typeof character != "undefined" ?
                                                 <WeaponTab weaponSet={character.weaponSet} characterId={characterId}/>
                                                 :
                                                 <div/>
                                             }
                                         </TabPanel>
-                                        <TabPanel value="2">
-                                            Armors
+                                        <TabPanel value={value} index={1}>
+                                            {typeof character != "undefined" ?
+                                                <ArmorTab armorSet={character.armorSet} characterId={characterId}/>
+                                                :
+                                                <div/>
+                                            }
                                         </TabPanel>
-                                        <TabPanel value="3">
-                                            Trapping
+                                        <TabPanel value={value} index={2}>
+                                            {typeof character != "undefined" ?
+                                                <TrappingTab trappingSet={character.trappingSet} characterId={characterId}/>
+                                                :
+                                                <div/>
+                                            }
                                         </TabPanel>
-                                    </TabContext>
                                 </TabPanel>
-                                <TabPanel value="2">
-                                    <Button onClick={console.log(character)}>
-                                        click
-                                    </Button>
+                                <TabPanel value={value} index={1}>
+                                    {typeof character != "undefined" ?
+                                        <SkillTab characterSkillsSet={character.characterSkillsSet} characterId={characterId}/>
+                                        :
+                                        <div/>
+                                    }
                                 </TabPanel>
-                                <TabPanel value="3">
+                                <TabPanel value={value} index={2}>
+                                    {typeof character != "undefined" ?
+                                        <TalentTab characterTalentsSet={character.characterTalentsSet} characterId={characterId}/>
+                                        :
+                                        <div/>
+                                    }
                                 </TabPanel>
-                            </TabContext>
                         </div>
                     </div>
                     :

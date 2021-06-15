@@ -28,11 +28,9 @@ public class Character {
     private Characteristics characteristics;
 
     @OneToMany(mappedBy = "character")
-    @JsonIgnore
     Set<CharacterSkills> characterSkillsSet;
 
     @OneToMany(mappedBy = "character")
-    @JsonIgnore
     Set<CharacterTalents> characterTalentsSet;
 
     @ManyToMany
