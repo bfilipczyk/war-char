@@ -3,6 +3,7 @@ import React from "react";
 import "./Tabs.css";
 import axios from "axios";
 
+
 export default function CharacterStats(props) {
     const data = props.stats;
     const characterId = props.characterId;
@@ -16,6 +17,7 @@ export default function CharacterStats(props) {
                 }
         }).then(window.location.reload())
     }
+
     return (
         <div>
             <Form className={"armorPointsForm"} onSubmit={update} >

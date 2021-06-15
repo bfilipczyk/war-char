@@ -22,6 +22,7 @@ function Register() {
                 setErrorMessage("error");
         })
     }
+
     const validatePassword = value => {
         let error = "";
         if(!password || ! confirmPassword){

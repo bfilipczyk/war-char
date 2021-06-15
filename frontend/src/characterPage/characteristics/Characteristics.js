@@ -3,8 +3,8 @@ import { Form, Text } from 'informed';
 import axios from "axios";
 import "./Characteristics.css"
 
-export default function Characteristics(props){
 
+export default function Characteristics(props){
     const [characteristics,setCharacteristics] = useState(null)
     if(props.character && characteristics===null) {
         setCharacteristics(props.character.characteristics)

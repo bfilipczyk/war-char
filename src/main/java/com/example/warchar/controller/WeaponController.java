@@ -3,8 +3,8 @@ package com.example.warchar.controller;
 
 
 import com.example.warchar.model.Weapon;
+import com.example.warchar.model.WeaponQuality;
 import com.example.warchar.payload.CharacterDataChangeRequest;
-import com.example.warchar.payload.WeaponResponse;
 import com.example.warchar.service.WeaponService;
 import javassist.NotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -19,8 +19,13 @@ public class WeaponController {
     private final WeaponService weaponService;
 
     @GetMapping()
-    List<WeaponResponse> all() {
+    List<Weapon> all() {
         return weaponService.getAllWeapon();
+    }
+
+    @GetMapping("/quality")
+    List<WeaponQuality> getAllWeaponQuality() {
+        return weaponService.getAllWeaponQuality();
     }
 
     @PostMapping("/addCharacterWeapon")

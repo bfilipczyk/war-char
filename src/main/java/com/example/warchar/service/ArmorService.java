@@ -2,9 +2,9 @@ package com.example.warchar.service;
 
 
 import com.example.warchar.model.Armor;
+import com.example.warchar.model.ArmorQuality;
 import com.example.warchar.model.Character;
-import com.example.warchar.model.Weapon;
-import com.example.warchar.payload.ArmorResponse;
+import com.example.warchar.model.WeaponQuality;
 import com.example.warchar.payload.CharacterDataChangeRequest;
 import com.example.warchar.repository.ArmorQualityRepository;
 import com.example.warchar.repository.ArmorRepository;
@@ -17,7 +17,6 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 
 @RequiredArgsConstructor
@@ -29,15 +28,15 @@ public class ArmorService {
     private final ArmorQualityRepository armorQualityRepository;
     private final CharacterRepository characterRepository;
 
-    public List<ArmorResponse> getAllArmor(){
-        List<ArmorResponse> response = armorRepository.findAll(Sort.by(Sort.Direction.ASC,"id")).stream().map(
-                ArmorResponse::of).collect(Collectors.toList());
+    public List<Armor> getAllArmor(){
 
-        return response;
+        return armorRepository.findAll(Sort.by(Sort.Direction.ASC,"id"));
 
     }
 
-    public Optional<Armor> getArmorById(long id){return armorRepository.findById(id);}
+    public List<ArmorQuality> getAllArmorQuality(){
+        return armorQualityRepository.findAll(Sort.by(Sort.Direction.ASC,"name"));
+    }
 
 
     public Armor removeCharacterArmor(CharacterDataChangeRequest request) throws NotFoundException {

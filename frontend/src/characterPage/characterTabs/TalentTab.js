@@ -5,7 +5,6 @@ import axios from "axios";
 import {Hidden} from "@material-ui/core";
 
 
-
 export default function TalentTab(props){
     const user = JSON.parse(localStorage.getItem('user'))
     const [characterTalentsSet,setCharacterTalentsSet] = useState(null)
@@ -53,6 +52,7 @@ export default function TalentTab(props){
             }
         ).then(window.location.reload())
     }
+
     const update = async (id)=> {
         const value = parseInt(prompt("Enter advancements"))
         if(!isNaN(value))
@@ -66,7 +66,6 @@ export default function TalentTab(props){
                 }
             ).then(window.location.reload())
         }
-
     }
 
     const columns = [

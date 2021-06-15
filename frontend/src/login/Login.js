@@ -6,10 +6,6 @@ import {useHistory} from "react-router";
 import {Link} from "react-router-dom";
 import axios from "axios";
 
-
-
-
-
 function Login() {
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
@@ -31,9 +27,6 @@ function Login() {
             });
 
     }
-
-
-
 
     return (
         <div className="login-container">

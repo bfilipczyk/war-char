@@ -2,8 +2,8 @@ package com.example.warchar.controller;
 
 
 import com.example.warchar.model.Armor;
-import com.example.warchar.model.Weapon;
-import com.example.warchar.payload.ArmorResponse;
+import com.example.warchar.model.ArmorQuality;
+import com.example.warchar.model.WeaponQuality;
 import com.example.warchar.payload.CharacterDataChangeRequest;
 import com.example.warchar.service.ArmorService;
 import javassist.NotFoundException;
@@ -12,7 +12,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 
 @RequiredArgsConstructor
@@ -25,8 +24,13 @@ public class ArmorController {
 
 
     @GetMapping()
-    List<ArmorResponse> all() {
+    List<Armor> all() {
         return armorService.getAllArmor();
+    }
+
+    @GetMapping("/quality")
+    List<ArmorQuality> getAllArmorQuality() {
+        return armorService.getAllArmorQuality();
     }
 
     @PostMapping("/addCharacterArmor")

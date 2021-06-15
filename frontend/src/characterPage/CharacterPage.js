@@ -15,7 +15,6 @@ import {Button} from "antd";
 import CharacterStats from "./characterTabs/CharacterStats";
 import ArmorPoints from "./characterTabs/ArmorPoints";
 
-
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
 
@@ -74,7 +73,6 @@ function CharacterPage() {
         {
             setLoading(true)
             fetchCharacter();
-
         }
         return() => {
             setComponentMounted(false)

@@ -27,10 +27,7 @@ function Home() {
     )
 
     const fetchDataCharacter = async () => {
-
-
         const user = JSON.parse(localStorage.getItem('user'))
-
         const response = await axios.get("/api/characters/"+user.id,
             {
                 headers:
@@ -101,9 +98,10 @@ function Home() {
                 </div>
                 <div className="homeButtonContainer">
                     <div className="homeLinks">
-                        <Button className="HomeButton" onClick={()=>history.push("/armor")} >Armors</Button>
-                        <Button className="HomeButton" onClick={()=>history.push("/weapon")} >Weapons</Button>
-                        <Button className="HomeButton" >Trapping</Button>
+                        <Button className="HomeButton" onClick={()=>history.push("/armor")}>Armors</Button>
+                        <Button className="HomeButton" onClick={()=>history.push("/weapon")}>Weapons</Button>
+                        <Button className="HomeButton" onClick={()=>history.push("/skills")}>Skills</Button>
+                        <Button className="HomeButton" onClick={()=>history.push("/talents")}>talents</Button>
                         <Button className="HomeButton" onClick={()=>{
                             localStorage.removeItem('user')
                             history.push("/armor")

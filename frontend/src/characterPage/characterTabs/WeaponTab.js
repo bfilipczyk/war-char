@@ -51,8 +51,6 @@ export default function WeaponTab(props){
                     }
             }
         ).then(window.location.reload())
-
-
     }
 
     const columns = [

@@ -5,7 +5,6 @@ import axios from "axios";
 import {Hidden} from "@material-ui/core";
 
 
-
 export default function SkillTab(props){
     const user = JSON.parse(localStorage.getItem('user'))
     const [characterSkillsSet,setCharacterSkillsSet] = useState(null)
@@ -66,8 +65,6 @@ export default function SkillTab(props){
                 }
             ).then(window.location.reload())
         }
-
-
     }
 
     const columns = [

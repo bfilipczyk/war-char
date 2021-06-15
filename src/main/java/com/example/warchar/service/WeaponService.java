@@ -2,8 +2,8 @@ package com.example.warchar.service;
 
 import com.example.warchar.model.Character;
 import com.example.warchar.model.Weapon;
+import com.example.warchar.model.WeaponQuality;
 import com.example.warchar.payload.CharacterDataChangeRequest;
-import com.example.warchar.payload.WeaponResponse;
 import com.example.warchar.repository.*;
 import javassist.NotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
@@ -38,11 +37,13 @@ public class WeaponService {
         return weaponRepository.save(weapon);
     }
 
-    public List<WeaponResponse> getAllWeapon(){
-        List<WeaponResponse> response = weaponRepository.findAll(Sort.by(Sort.Direction.ASC,"id")).stream().map(
-                WeaponResponse::of).collect(Collectors.toList());
+    public List<Weapon> getAllWeapon(){
 
-        return response;
+        return weaponRepository.findAll(Sort.by(Sort.Direction.ASC,"id"));
+    }
+
+    public List<WeaponQuality> getAllWeaponQuality(){
+        return weaponQualityRepository.findAll(Sort.by(Sort.Direction.ASC,"name"));
     }
 
     public Weapon addCharacterWeapon(CharacterDataChangeRequest request) throws NotFoundException {
