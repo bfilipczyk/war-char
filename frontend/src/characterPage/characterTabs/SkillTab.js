@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import {Space, Button, Table, Input, Form} from "antd";
+import {Space, Button, Table} from "antd";
 import "./Tabs.css"
 import axios from "axios";
 
@@ -8,28 +8,36 @@ import axios from "axios";
 export default function SkillTab(props){
     const user = JSON.parse(localStorage.getItem('user'))
     const [characterSkillsSet,setCharacterSkillsSet] = useState(null)
-    const [characterId,setCharacterId] = useState(null)
     if(props.characterSkillsSet && characterSkillsSet===null) {
         setCharacterSkillsSet(props.characterSkillsSet)
-        setCharacterId(props.characterId)
     }
 
 
 
     const remove = async (id)=> {
-        let dataId = id
-        // await axios.patch("/api/armor/removeCharacterArmor",{characterId,dataId},
-        //     {
-        //         headers:
-        //             {
-        //                 Authorization:'Bearer '+ user.accessToken
-        //             }
-        //     }
-        // ).then(window.location.reload())
+        await axios.delete("/api/skill/removeCharacterSkill/"+id,
+            {
+                headers:
+                    {
+                        Authorization:'Bearer '+ user.accessToken
+                    }
+            }
+        ).then(window.location.reload())
     }
     const update = async (id)=> {
-        const adv = parseInt(prompt("Enter advancements"))
-        console.log(adv)
+        const value = parseInt(prompt("Enter advancements"))
+        if(!isNaN(value))
+        {
+            await axios.patch("/api/skill/updateCharacterSkill",{id,value},
+                {
+                    headers:
+                        {
+                            Authorization:'Bearer '+ user.accessToken
+                        }
+                }
+            ).then(window.location.reload())
+        }
+
 
     }
 
@@ -79,8 +87,7 @@ export default function SkillTab(props){
             render: (record) => (
                 <Space>
                     <Button className="tabButton" onClick={()=>{
-                        // remove(record.id)
-                        console.log(record)
+                        remove(record.id)
                     }}>Remove</Button>
                     <Button className="tabButton" onClick={()=>{
                         update(record.id)

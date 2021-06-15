@@ -5,9 +5,7 @@ import axios from "axios";
 import React, {useEffect, useState} from "react";
 import Characteristics from "./characteristics/Characteristics";
 import ArmorPoints from "./armorPoints/ArmorPoints";
-import {AppBar, Box, Tab, Tabs, Typography} from "@material-ui/core";
-import TabContext from '@material-ui/lab/TabContext';
-import TabList from '@material-ui/lab/TabList';
+import {AppBar, Tab, Tabs, Typography} from "@material-ui/core";
 import WeaponTab from "./characterTabs/WeaponTab";
 import ArmorTab from "./characterTabs/ArmorTab";
 import TrappingTab from "./characterTabs/TrappingTab";
@@ -161,14 +159,14 @@ function CharacterPage() {
                                 </TabPanel>
                                 <TabPanel value={value} index={1}>
                                     {typeof character != "undefined" ?
-                                        <SkillTab characterSkillsSet={character.characterSkillsSet} characterId={characterId}/>
+                                        <SkillTab characterSkillsSet={character.characterSkillsSet}/>
                                         :
                                         <div/>
                                     }
                                 </TabPanel>
                                 <TabPanel value={value} index={2}>
                                     {typeof character != "undefined" ?
-                                        <TalentTab characterTalentsSet={character.characterTalentsSet} characterId={characterId}/>
+                                        <TalentTab characterTalentsSet={character.characterTalentsSet}/>
                                         :
                                         <div/>
                                     }
