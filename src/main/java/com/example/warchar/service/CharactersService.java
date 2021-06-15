@@ -30,9 +30,8 @@ public class CharactersService {
 
     public Character getCharacterById(long characterId) throws NotFoundException {
 
-        Character character = characterRepository.findById(characterId)
+        return characterRepository.findById(characterId)
                 .orElseThrow(() -> new NotFoundException("Character with id: " + characterId + " not found"));
-        return character;
     }
 
 
@@ -80,5 +79,10 @@ public class CharactersService {
                     return characteristicsRepository.save(characteristics);
                 })
                 .orElseThrow(() -> new NotFoundException("Characteristics with id: " + characteristicsId + " not found"));
+    }
+
+    public void removeCharacter(long id) {
+//
+        characterRepository.deleteById(id);
     }
 }

@@ -21,11 +21,16 @@ function Home() {
             if(!characters && localStorage.getItem('user')!=null)
             {
                 fetchDataCharacter();
+
             }
         }
     )
 
     const fetchDataCharacter = async () => {
+
+
+        const user = JSON.parse(localStorage.getItem('user'))
+
         const response = await axios.get("/api/characters/"+user.id,
             {
                 headers:
@@ -36,8 +41,7 @@ function Home() {
         setCharacters(response.data)
     }
 
-    const handleSubmit = async e => {
-        e.preventDefault();
+    const handleSubmit = async () => {
         await axios.post("/api/characters/newCharacter/"+user.id,{name},
             {
                 headers:
@@ -45,8 +49,18 @@ function Home() {
                         Authorization:'Bearer '+ user.accessToken
                     }
             }
-            ).then(window.location.reload)
+            ).then(window.location.reload())
+    }
 
+    const remove = async (id)=> {
+        await axios.delete("/api/characters/removeCharacter/"+id,
+            {
+                headers:
+                    {
+                        Authorization:'Bearer '+ user.accessToken
+                    }
+            }
+        ).then(window.location.reload())
     }
 
     const columns = [
@@ -61,6 +75,9 @@ function Home() {
                     <Button className="HomeButton" onClick={() => {
                         history.push("/characters/"+record.id)
                     }}>Open</Button>
+                    <Button className="HomeButton" onClick={() => {
+                        remove(record.id)
+                    }}>Remove</Button>
                 </Space>
             )
         }
@@ -74,7 +91,7 @@ function Home() {
             <div className="homeMain">
                 <div className="homeCharacters">
                     <h1>Characters</h1>
-                    <Table columns={columns} dataSource={characters} size="small" rowKey="name" pagination={false} />
+                    <Table columns={columns} dataSource={characters} size="small" rowKey="id" pagination={false} />
                     <form>
                         <Input field="name" placeholder="name" className="input log-in-input"
                                onChange={e => setName(e.target.value)}/>

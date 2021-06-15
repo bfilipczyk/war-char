@@ -24,13 +24,13 @@ public class Character {
     private Long id;
     private String name;
 
-    @OneToOne
+    @OneToOne(orphanRemoval = true)
     private Characteristics characteristics;
 
-    @OneToMany(mappedBy = "character")
+    @OneToMany(mappedBy = "character",orphanRemoval = true)
     Set<CharacterSkills> characterSkillsSet;
 
-    @OneToMany(mappedBy = "character")
+    @OneToMany(mappedBy = "character",orphanRemoval = true)
     Set<CharacterTalents> characterTalentsSet;
 
     @ManyToMany

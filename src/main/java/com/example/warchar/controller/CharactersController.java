@@ -39,7 +39,10 @@ public class CharactersController {
         return charactersService.updateCharacteristics(characteristicsRequest,characteristicsId);
     }
 
-
+    @DeleteMapping("/removeCharacter/{characterId}")
+    void removeCharacter(@PathVariable long characterId) {
+        charactersService.removeCharacter(characterId);
+    }
 
 
 }
