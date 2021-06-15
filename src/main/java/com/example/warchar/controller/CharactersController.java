@@ -3,6 +3,7 @@ package com.example.warchar.controller;
 
 import com.example.warchar.model.Character;
 import com.example.warchar.model.Characteristics;
+import com.example.warchar.payload.CharacterStatsRequest;
 import com.example.warchar.payload.CharacteristicsRequest;
 import com.example.warchar.payload.CharactersResponse;
 import com.example.warchar.payload.NewCharacterRequest;
@@ -37,6 +38,12 @@ public class CharactersController {
     @PutMapping(value = "/updateCharacteristics/{characteristicsId}")
     Characteristics updateCharacteristics(@RequestBody CharacteristicsRequest characteristicsRequest, @PathVariable long characteristicsId) throws NotFoundException {
         return charactersService.updateCharacteristics(characteristicsRequest,characteristicsId);
+    }
+
+    @PatchMapping(value = "/updateCharacterStats/{characterId}")
+    Character updateCharacterStats(@RequestBody CharacterStatsRequest request, @PathVariable long characterId) throws NotFoundException {
+        System.out.println("Test");
+        return charactersService.updateCharacterStats(request,characterId);
     }
 
     @DeleteMapping("/removeCharacter/{characterId}")

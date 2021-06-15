@@ -2,6 +2,7 @@ package com.example.warchar.service;
 
 import com.example.warchar.model.Character;
 import com.example.warchar.model.Characteristics;
+import com.example.warchar.payload.CharacterStatsRequest;
 import com.example.warchar.payload.CharacteristicsRequest;
 import com.example.warchar.payload.CharactersResponse;
 import com.example.warchar.payload.NewCharacterRequest;
@@ -53,6 +54,13 @@ public class CharactersService {
         characteristics = characteristicsRepository.save(characteristics);
         character.setName(newCharacterRequest.getName());
         character.setUser(usersRepository.findById(userId).get());
+        character.setCareer("default");
+        character.setRace("default");
+        character.setExperience(0);
+        character.setFate(0);
+        character.setResilience(0);
+        character.setTotalWounds(0);
+        character.setCurrentWounds(0);
         character.setCharacteristics(characteristics);
         character.setCharacterSkillsSet(null);
         character.setCharacterTalentsSet(null);
@@ -81,8 +89,23 @@ public class CharactersService {
                 .orElseThrow(() -> new NotFoundException("Characteristics with id: " + characteristicsId + " not found"));
     }
 
+    public Character updateCharacterStats(CharacterStatsRequest request, long characterId) throws NotFoundException {
+        Character character = characterRepository.findById(characterId)
+                .orElseThrow(() -> new NotFoundException("Character with id: " + characterId + " not found"));
+
+        System.out.println("Test2");
+        character.setExperience(request.getExperience());
+        character.setResilience(request.getResilience());
+        character.setFate(request.getFate());
+        character.setRace(request.getRace());
+        character.setCareer(request.getCareer());
+        character.setCurrentWounds(request.getCurrentWounds());
+        character.setTotalWounds(request.getTotalWounds());
+
+        return characterRepository.save(character);
+    }
+
     public void removeCharacter(long id) {
-//
         characterRepository.deleteById(id);
     }
 }

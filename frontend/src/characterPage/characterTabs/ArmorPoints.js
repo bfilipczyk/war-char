@@ -1,6 +1,6 @@
 import React from 'react'
 import {Form, Text} from "informed";
-import "./ArmorPoints.css"
+import "./Tabs.css"
 
 export default function ArmorPoints() {
     const spots = ["Head","PrimaryArm","SecondaryArm","Shield","Body","RightLeg","LeftLeg"]

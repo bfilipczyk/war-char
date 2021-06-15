@@ -4,7 +4,6 @@ import "./CharacterPage.css"
 import axios from "axios";
 import React, {useEffect, useState} from "react";
 import Characteristics from "./characteristics/Characteristics";
-import ArmorPoints from "./armorPoints/ArmorPoints";
 import {AppBar, Tab, Tabs, Typography} from "@material-ui/core";
 import WeaponTab from "./characterTabs/WeaponTab";
 import ArmorTab from "./characterTabs/ArmorTab";
@@ -13,6 +12,8 @@ import SkillTab from "./characterTabs/SkillTab";
 import PropTypes from "prop-types";
 import TalentTab from "./characterTabs/TalentTab";
 import {Button} from "antd";
+import CharacterStats from "./characterTabs/CharacterStats";
+import ArmorPoints from "./characterTabs/ArmorPoints";
 
 
 function TabPanel(props) {
@@ -93,6 +94,7 @@ function CharacterPage() {
         setLoading(false)
         if(componentMounted){
             setCharacter(response.data)
+            console.log(response.data)
         }
     }
 
@@ -111,7 +113,17 @@ function CharacterPage() {
                         :
                         <div/>}
                         <Characteristics character={character} />
+                        <div className={"characterArmorStatsDiv"}>
                         <ArmorPoints/>
+                        {typeof character != "undefined" ?
+                            <CharacterStats stats={{"race":character.race,"experience":character.experience, "career":character.career,
+                                "currentWounds":character.currentWounds, "totalWounds":character.totalWounds,
+                                "fate":character.fate,"resilience":character.resilience}} characterId={characterId}/>
+                            :
+                            <div/>
+                        }
+                        </div>
+
                         <div>
                                 <AppBar position="static">
                                     <Tabs

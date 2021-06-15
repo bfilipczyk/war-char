@@ -3,7 +3,6 @@ package com.example.warchar.model;
 
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -23,6 +22,13 @@ public class Character {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name;
+    private String career;
+    private String race;
+    private int totalWounds;
+    private int currentWounds;
+    private int experience;
+    private int fate;
+    private int resilience;
 
     @OneToOne(orphanRemoval = true)
     private Characteristics characteristics;

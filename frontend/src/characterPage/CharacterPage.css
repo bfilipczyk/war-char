@@ -33,3 +33,9 @@
 .characterHomeDiv {
     align-items: end;
 }
+
+.characterArmorStatsDiv {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}

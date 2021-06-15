@@ -10,3 +10,24 @@
     display: flex;
     flex-direction: column;
 }
+
+.armorPointsForm {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.armorPointsLabel {
+    display: flex;
+    flex-direction: row;
+}
+
+.armorPointsText {
+    width: 15px;
+}
+.statsText {
+    width: 50px;
+}
+.statsDiv {
+    width: 50%;
+}
