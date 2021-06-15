@@ -1,7 +1,6 @@
 package com.example.warchar.repository;
 
 
-
 import com.example.warchar.model.Users;
 import org.springframework.data.jpa.repository.JpaRepository;
 

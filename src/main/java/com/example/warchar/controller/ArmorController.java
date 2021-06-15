@@ -3,7 +3,6 @@ package com.example.warchar.controller;
 
 import com.example.warchar.model.Armor;
 import com.example.warchar.model.ArmorQuality;
-import com.example.warchar.model.WeaponQuality;
 import com.example.warchar.payload.CharacterDataChangeRequest;
 import com.example.warchar.service.ArmorService;
 import javassist.NotFoundException;
@@ -19,9 +18,7 @@ import java.util.List;
 @RequestMapping("/api/armor")
 public class ArmorController {
 
-
     private final ArmorService armorService;
-
 
     @GetMapping()
     List<Armor> all() {

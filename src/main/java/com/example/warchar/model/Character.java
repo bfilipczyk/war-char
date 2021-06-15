@@ -1,7 +1,6 @@
 package com.example.warchar.model;
 
 
-
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

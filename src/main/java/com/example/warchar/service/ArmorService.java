@@ -4,7 +4,6 @@ package com.example.warchar.service;
 import com.example.warchar.model.Armor;
 import com.example.warchar.model.ArmorQuality;
 import com.example.warchar.model.Character;
-import com.example.warchar.model.WeaponQuality;
 import com.example.warchar.payload.CharacterDataChangeRequest;
 import com.example.warchar.repository.ArmorQualityRepository;
 import com.example.warchar.repository.ArmorRepository;
@@ -15,7 +14,6 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 
 

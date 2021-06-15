@@ -1,7 +1,6 @@
 package com.example.warchar.repository;
 
 
-import com.example.warchar.model.CharacterSkills;
 import com.example.warchar.model.CharacterTalents;
 import org.springframework.data.jpa.repository.JpaRepository;
 

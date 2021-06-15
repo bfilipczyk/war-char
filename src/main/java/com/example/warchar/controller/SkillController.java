@@ -15,6 +15,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/skill")
 public class SkillController {
+
     private final SkillService skillService;
 
     @GetMapping()

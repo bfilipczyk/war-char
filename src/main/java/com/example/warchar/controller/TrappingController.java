@@ -1,7 +1,7 @@
 package com.example.warchar.controller;
 
+
 import com.example.warchar.model.Trapping;
-import com.example.warchar.model.Weapon;
 import com.example.warchar.payload.CharacterDataChangeRequest;
 import com.example.warchar.service.TrappingService;
 import javassist.NotFoundException;
@@ -14,8 +14,8 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/trapping")
 public class TrappingController {
-    private final TrappingService trappingService;
 
+    private final TrappingService trappingService;
 
     @GetMapping()
     List<Trapping> all() {

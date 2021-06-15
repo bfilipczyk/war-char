@@ -1,5 +1,6 @@
 package com.example.warchar.exception;
 
+
 public class UserAlreadyExistException extends Exception{
     public UserAlreadyExistException(){
 
