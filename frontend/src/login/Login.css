@@ -1,0 +1,59 @@
+body{
+    background: url("../assets/bg.jpg") no-repeat center center fixed;
+}
+.login-container {
+    width: 100vw;
+    height: 100vh;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+}
+.log-in-input {
+    margin: 6px 0;
+    width: 200px;
+}
+.sign-in-button {
+    width: 200px;
+    background-color: #B53A3A;
+    font-family: 'Segoe UI', sans-serif;
+    margin: 0.5em;
+}
+.register-button {
+    width: 200px;
+    background-color: #B53A3A;
+    text-align: center;
+    font-family: 'Segoe UI', sans-serif;
+    color: #270A0A;
+}
+.login-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    width: 100%;
+    padding: 1em;
+
+    background: #2C2929FA 0 0 no-repeat padding-box;
+    border: 1px solid #707070;
+    border-radius: 20px;
+    opacity: 1;
+}
+.error-message {
+    color: aliceblue;
+}
+.login.input {
+    padding: 0.2em;
+}
+
+@media (max-width: 800px) {
+    .login-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+}

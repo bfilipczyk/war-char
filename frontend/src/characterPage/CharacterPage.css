@@ -1,0 +1,41 @@
+.characterMain {
+    background: #2C2929FA 0 0 no-repeat padding-box;
+    border: 1px solid #707070;
+    border-radius: 20px;
+    opacity: 1;
+    padding: 1em;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    color: white;
+}
+.characterContainer {
+    width: 100vw;
+    height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+.characterButton {
+    background-color: #B53A3A;
+    font-family: 'Segoe UI', sans-serif;
+    margin: 0.5em;
+}
+.characterDiv {
+    width: 100%;
+}
+
+.characterHomeDiv {
+    align-items: end;
+}
+
+.characterArmorStatsDiv {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
