@@ -48,6 +48,7 @@ function a11yProps(index) {
 function CharacterPage() {
     let history = useHistory();
     let characterId = useParams().characterId;
+    const user = localStorage.getItem('user');
     const [character,setCharacter] = useState()
     const [loading, setLoading]= useState(true)
     const [value, setValue] = React.useState(0);
@@ -62,22 +63,22 @@ function CharacterPage() {
 
 
     useEffect(()=> {
-        if(localStorage.getItem('user')==null)
+        if(user==null)
         {
             history.push('/');
         }
-        if(!character && localStorage.getItem('user')!=null)
+        if(!character && user!=null)
         {
             setLoading(true)
             fetchCharacter();
 
         }
+
     })
 
 
     const fetchCharacter= async () => {
         const user = JSON.parse(localStorage.getItem('user'))
-
         const response = await axios.get("/api/characters/character/"+characterId,
             {
                 headers:

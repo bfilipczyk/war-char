@@ -1,16 +1,39 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import {Space,Button, Table} from "antd";
 import "./Tabs.css"
 import axios from "axios";
+import {Collapse, Hidden} from "@material-ui/core";
 
 
 export default function WeaponTab(props){
     const user = JSON.parse(localStorage.getItem('user'))
     const [weaponSet,setWeaponSet] = useState(null)
     const [characterId,setCharacterId] = useState(null)
+    const [weapons, setWeapons] = useState()
+    const [showAdd, setShowAdd] = useState(true)
     if(props.weaponSet && weaponSet===null) {
         setWeaponSet(props.weaponSet)
         setCharacterId(props.characterId)
+    }
+
+    useEffect(()=> {
+        if(!weapons && user!=null)
+        {
+            fetchWeapons();
+
+        }
+
+    })
+
+    const fetchWeapons= async () => {
+        const response = await axios.get("/api/weapon",
+            {
+                headers:
+                    {
+                        Authorization:'Bearer '+ user.accessToken
+                    }
+            });
+        setWeapons(response.data)
     }
 
     const remove = async (id)=> {
@@ -26,6 +49,7 @@ export default function WeaponTab(props){
 
 
     }
+
     const columns = [
         {
             title: 'Weapon',
@@ -71,10 +95,54 @@ export default function WeaponTab(props){
         }
     ]
 
+    const columnsWeapons = [
+        {
+            title: 'Name',
+            dataIndex: 'name',
+            key: 'name'
+        },
+        {
+            key:'action',
+            render: (record) => (
+                <Space>
+                    <Button className="tabButton" onClick={()=>{
+                        add(record.id)
+                    }}>Add</Button>
+                </Space>
+            )
+        }]
+
+    const add = async (id) => {
+        let dataId = id
+        await axios.post("/api/weapon/addCharacterWeapon",{characterId,dataId},
+            {
+                headers:
+                    {
+                        Authorization:'Bearer '+ user.accessToken
+                    }
+            }
+        ).then(window.location.reload())
+    }
+
     return(
         <div>
             {weaponSet!=null ?
+                <div className={"tabDiv"}>
                 <Table columns={columns} dataSource={weaponSet} size="small" rowKey="name" pagination={false}/>
+                <Button className="tabButton" onClick={()=>{
+                if(showAdd)
+                    setShowAdd(false)
+                else
+                    setShowAdd(true)}
+                }>Add</Button>
+                    <Hidden lgDown={showAdd}>
+                        {typeof weapons != "undefined" ?
+                            <Table columns={columnsWeapons} dataSource={weapons} size="small" rowKey="name" pagination={false}/>
+                            :
+                            <div/>
+                        }
+                    </Hidden>
+                </div>
                 :
                 <div/>
             }

@@ -1,10 +1,7 @@
 package com.example.warchar.controller;
 
-import com.example.warchar.model.Armor;
 import com.example.warchar.model.CharacterSkills;
 import com.example.warchar.model.Skill;
-import com.example.warchar.payload.ArmorResponse;
-import com.example.warchar.payload.RemoveCharacterDataRequest;
 import com.example.warchar.payload.UpdateSkillTalent;
 import com.example.warchar.service.SkillService;
 import javassist.NotFoundException;

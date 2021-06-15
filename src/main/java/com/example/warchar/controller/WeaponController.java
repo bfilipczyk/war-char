@@ -3,7 +3,7 @@ package com.example.warchar.controller;
 
 
 import com.example.warchar.model.Weapon;
-import com.example.warchar.payload.RemoveCharacterDataRequest;
+import com.example.warchar.payload.CharacterDataChangeRequest;
 import com.example.warchar.payload.WeaponResponse;
 import com.example.warchar.service.WeaponService;
 import javassist.NotFoundException;
@@ -23,8 +23,13 @@ public class WeaponController {
         return weaponService.getAllWeapon();
     }
 
+    @PostMapping("/addCharacterWeapon")
+    Weapon addCharacterWeapon(@RequestBody CharacterDataChangeRequest request) throws NotFoundException {
+        return weaponService.addCharacterWeapon(request);
+    }
+
     @PatchMapping("/removeCharacterWeapon")
-    Weapon removeCharacterWeapon(@RequestBody RemoveCharacterDataRequest request) throws NotFoundException {
+    Weapon removeCharacterWeapon(@RequestBody CharacterDataChangeRequest request) throws NotFoundException {
         return weaponService.removeCharacterWeapon(request);
     }
 }

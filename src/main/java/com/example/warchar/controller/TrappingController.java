@@ -1,10 +1,8 @@
 package com.example.warchar.controller;
 
-import com.example.warchar.model.Armor;
 import com.example.warchar.model.Trapping;
-import com.example.warchar.payload.ArmorResponse;
-import com.example.warchar.payload.RemoveCharacterDataRequest;
-import com.example.warchar.service.ArmorService;
+import com.example.warchar.model.Weapon;
+import com.example.warchar.payload.CharacterDataChangeRequest;
 import com.example.warchar.service.TrappingService;
 import javassist.NotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -25,7 +23,12 @@ public class TrappingController {
     }
 
     @PatchMapping("/removeCharacterTrapping")
-    Trapping removeCharacterTrapping(@RequestBody RemoveCharacterDataRequest request) throws NotFoundException {
+    Trapping removeCharacterTrapping(@RequestBody CharacterDataChangeRequest request) throws NotFoundException {
         return trappingService.removeCharacterTrapping(request);
+    }
+
+    @PostMapping("/addCharacterTrapping")
+    Trapping addCharacterTrapping(@RequestBody CharacterDataChangeRequest request) throws NotFoundException {
+        return trappingService.addCharacterTrapping(request);
     }
 }

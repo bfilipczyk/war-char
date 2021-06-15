@@ -3,7 +3,6 @@ package com.example.warchar.service;
 import com.example.warchar.model.Character;
 import com.example.warchar.model.CharacterSkills;
 import com.example.warchar.model.Skill;
-import com.example.warchar.payload.RemoveCharacterDataRequest;
 import com.example.warchar.payload.UpdateSkillTalent;
 import com.example.warchar.repository.CharacterRepository;
 import com.example.warchar.repository.CharacterSkillsRepository;

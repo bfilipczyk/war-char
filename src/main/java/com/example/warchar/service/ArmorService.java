@@ -5,7 +5,7 @@ import com.example.warchar.model.Armor;
 import com.example.warchar.model.Character;
 import com.example.warchar.model.Weapon;
 import com.example.warchar.payload.ArmorResponse;
-import com.example.warchar.payload.RemoveCharacterDataRequest;
+import com.example.warchar.payload.CharacterDataChangeRequest;
 import com.example.warchar.repository.ArmorQualityRepository;
 import com.example.warchar.repository.ArmorRepository;
 import com.example.warchar.repository.CharacterRepository;
@@ -40,7 +40,7 @@ public class ArmorService {
     public Optional<Armor> getArmorById(long id){return armorRepository.findById(id);}
 
 
-    public Armor removeCharacterArmor(RemoveCharacterDataRequest request) throws NotFoundException {
+    public Armor removeCharacterArmor(CharacterDataChangeRequest request) throws NotFoundException {
         Character character = characterRepository.findById(request.getCharacterId()).orElseThrow(() -> new NotFoundException("Character with id: " + request.getCharacterId() + " not found"));
         Armor armor = armorRepository.findById(request.getDataId()).orElseThrow(() -> new NotFoundException("Armor with id: " + request.getDataId() + " not found"));
         Set<Character> armorCharacters = armor.getCharacterSet();
@@ -50,6 +50,19 @@ public class ArmorService {
 
         character.setArmorSet(charactersArmor);
         armor.setCharacterSet(armorCharacters);
+
+        characterRepository.save(character);
+        return armorRepository.save(armor);
+    }
+    public Armor addCharacterArmor(CharacterDataChangeRequest request) throws NotFoundException {
+        Character character = characterRepository.findById(request.getCharacterId())
+                .orElseThrow(() -> new NotFoundException("Character with id: " + request.getCharacterId() + " not found"));
+        Armor armor = armorRepository.findById(request.getDataId())
+                .orElseThrow(() -> new NotFoundException("Armor with id: " + request.getDataId() + " not found"));
+        Set<Character> armorCharacters = armor.getCharacterSet();
+        Set<Armor> characterArmor = character.getArmorSet();
+        armorCharacters.add(character);
+        characterArmor.add(armor);
 
         characterRepository.save(character);
         return armorRepository.save(armor);
