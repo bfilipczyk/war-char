@@ -35,24 +35,44 @@ export default function SkillTab(props){
 
     const columns = [
         {
+            title: 'Skill',
+            render: (record) => (
+                <React.Fragment>
+                    {record.skill.name}
+                    <br/>
+                    {record.skill.attribute}
+                    <br/>
+                    {record.advances}
+                    <br/>
+                    {record.skill.type}
+                    <br/>
+                </React.Fragment>
+            ),
+            responsive: ["xs"]
+        },
+        {
             title: 'Name',
             dataIndex: ['skill','name'],
-            key: 'name'
+            key: 'name',
+            responsive: ["sm"]
         },
         {
             title: 'Attr',
             dataIndex: ['skill','attribute'],
-            key: 'Atrr'
+            key: 'Atrr',
+            responsive: ["sm"]
         },
         {
             title: 'Adv',
             dataIndex: 'advances',
             key: 'advances',
+            responsive: ["sm"]
         },
         {
             title: 'Type',
             dataIndex: ['skill','type'],
-            key: 'type'
+            key: 'type',
+            responsive: ["sm"]
         },
         {
             key:'action',

@@ -28,19 +28,36 @@ export default function ArmorTab(props){
     }
     const columns = [
         {
+            title: 'Armor',
+            render: (record) => (
+                <React.Fragment>
+                    {record.name}
+                    <br/>
+                    {record.location}
+                    <br/>
+                    {record.armorPoints}
+                    <br/>
+                </React.Fragment>
+            ),
+            responsive: ["xs"]
+        },
+        {
             title: 'Name',
             dataIndex: 'name',
-            key: 'name'
+            key: 'name',
+            responsive: ["sm"]
         },
         {
             title: 'Location',
             dataIndex: 'location',
-            key: 'location'
+            key: 'location',
+            responsive: ["sm"]
         },
         {
             title: 'Armor Points',
             dataIndex: 'armorPoints',
-            key: 'armorPoints'
+            key: 'armorPoints',
+            responsive: ["sm"]
         },
         {
             key:'action',

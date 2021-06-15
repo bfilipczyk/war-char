@@ -137,21 +137,21 @@ function CharacterPage() {
                                                 <Tab label="Trapping" {...a11yProps(2)}/>
                                             </Tabs>
                                         </AppBar>
-                                        <TabPanel value={value} index={0}>
+                                        <TabPanel value={value2} index={0}>
                                             {typeof character != "undefined" ?
                                                 <WeaponTab weaponSet={character.weaponSet} characterId={characterId}/>
                                                 :
                                                 <div/>
                                             }
                                         </TabPanel>
-                                        <TabPanel value={value} index={1}>
+                                        <TabPanel value={value2} index={1}>
                                             {typeof character != "undefined" ?
                                                 <ArmorTab armorSet={character.armorSet} characterId={characterId}/>
                                                 :
                                                 <div/>
                                             }
                                         </TabPanel>
-                                        <TabPanel value={value} index={2}>
+                                        <TabPanel value={value2} index={2}>
                                             {typeof character != "undefined" ?
                                                 <TrappingTab trappingSet={character.trappingSet} characterId={characterId}/>
                                                 :

@@ -35,14 +35,28 @@ export default function TalentTab(props){
 
     const columns = [
         {
+            title: 'Talent',
+            render: (record) => (
+                <React.Fragment>
+                    {record.talent.name}
+                    <br/>
+                    {record.advances}
+                    <br/>
+                </React.Fragment>
+            ),
+            responsive: ["xs"]
+        },
+        {
             title: 'Name',
             dataIndex: ['talent','name'],
-            key: 'name'
+            key: 'name',
+            responsive: ["sm"]
         },
         {
             title: 'Adv',
             dataIndex: 'advances',
             key: 'advances',
+            responsive: ["sm"]
         },
         {
             key:'action',
