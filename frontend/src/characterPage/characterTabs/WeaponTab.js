@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react'
 import {Space,Button, Table} from "antd";
 import "./Tabs.css"
 import axios from "axios";
-import {Collapse, Hidden} from "@material-ui/core";
+import { Hidden} from "@material-ui/core";
 
 
 export default function WeaponTab(props){
@@ -11,6 +11,8 @@ export default function WeaponTab(props){
     const [characterId,setCharacterId] = useState(null)
     const [weapons, setWeapons] = useState()
     const [showAdd, setShowAdd] = useState(true)
+    const [componentMounted,setComponentMounted] = useState(true);
+
     if(props.weaponSet && weaponSet===null) {
         setWeaponSet(props.weaponSet)
         setCharacterId(props.characterId)
@@ -20,9 +22,10 @@ export default function WeaponTab(props){
         if(!weapons && user!=null)
         {
             fetchWeapons();
-
         }
-
+        return() => {
+            setComponentMounted(false)
+        }
     })
 
     const fetchWeapons= async () => {
@@ -33,7 +36,9 @@ export default function WeaponTab(props){
                         Authorization:'Bearer '+ user.accessToken
                     }
             });
-        setWeapons(response.data)
+        if(componentMounted) {
+            setWeapons(response.data)
+        }
     }
 
     const remove = async (id)=> {

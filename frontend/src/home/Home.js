@@ -10,7 +10,6 @@ function Home() {
     let history = useHistory();
 
     const [characters,setCharacters] =  useState(null);
-    const [errorMessage, setErrorMessage] = useState();
     const [name, setName] = useState();
     const user = JSON.parse(localStorage.getItem('user'))
 
@@ -22,16 +21,11 @@ function Home() {
             if(!characters && localStorage.getItem('user')!=null)
             {
                 fetchDataCharacter();
-
             }
         }
     )
 
     const fetchDataCharacter = async () => {
-
-
-
-
         const response = await axios.get("/api/characters/"+user.id,
             {
                 headers:
@@ -51,8 +45,7 @@ function Home() {
                         Authorization:'Bearer '+ user.accessToken
                     }
             }
-            ).then((response) => {
-            })
+            ).then(window.location.reload)
 
     }
 
@@ -86,9 +79,6 @@ function Home() {
                         <Input field="name" placeholder="name" className="input log-in-input"
                                onChange={e => setName(e.target.value)}/>
                         <Button type="submit" className="HomeButton" onClick={handleSubmit} >Create Character</Button>
-                        <div className="error-message">
-                            {errorMessage}
-                        </div>
                     </form>
 
                 </div>

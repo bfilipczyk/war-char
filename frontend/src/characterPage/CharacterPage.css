@@ -29,3 +29,7 @@
 .characterDiv {
     width: 100%;
 }
+
+.characterHomeDiv {
+    align-items: end;
+}

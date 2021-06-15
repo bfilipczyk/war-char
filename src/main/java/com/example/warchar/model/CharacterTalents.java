@@ -15,6 +15,7 @@ import javax.persistence.*;
 @Entity
 public class CharacterTalents {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
 
     @ManyToOne

@@ -2,6 +2,7 @@ package com.example.warchar.service;
 
 import com.example.warchar.model.*;
 import com.example.warchar.model.Character;
+import com.example.warchar.payload.CharacterDataChangeRequest;
 import com.example.warchar.payload.UpdateSkillTalent;
 import com.example.warchar.repository.CharacterRepository;
 import com.example.warchar.repository.CharacterTalentsRepository;
@@ -48,6 +49,36 @@ public class TalentService {
                 .orElseThrow(() -> new NotFoundException("Character talent with id: " + request.getId() + " not found"));
         characterTalents.setAdvances(request.getValue());
         return characterTalentsRepository.save(characterTalents);
+    }
 
+    public CharacterTalents addCharacterTalent(CharacterDataChangeRequest request) throws NotFoundException {
+        if(characterTalentsRepository.existsById(request.getDataId()))
+        {
+            return null;
+        }
+        CharacterTalents characterTalents = new CharacterTalents();
+        Character character = characterRepository.findById(request.getCharacterId())
+                .orElseThrow(() -> new NotFoundException("Character with id: " + request.getCharacterId() + " not found"));
+        Talent talent = talentRepository.findById(request.getDataId())
+                .orElseThrow(() -> new NotFoundException("talent with id: " + request.getDataId() + " not found"));
+
+        characterTalents.setAdvances(1);
+        characterTalents.setCharacter(character);
+        characterTalents.setTalent(talent);
+
+        characterTalents = characterTalentsRepository.save(characterTalents);
+
+        Set<CharacterTalents> characterTalentsSet1 = character.getCharacterTalentsSet();
+        characterTalentsSet1.add(characterTalents);
+        Set<CharacterTalents> characterTalentsSet2 = talent.getCharacterTalentsSet();
+        characterTalentsSet2.add(characterTalents);
+
+        character.setCharacterTalentsSet(characterTalentsSet1);
+        talent.setCharacterTalentsSet(characterTalentsSet2);
+
+        talentRepository.save(talent);
+        characterRepository.save(character);
+
+        return characterTalents;
     }
 }

@@ -12,6 +12,7 @@ import TrappingTab from "./characterTabs/TrappingTab";
 import SkillTab from "./characterTabs/SkillTab";
 import PropTypes from "prop-types";
 import TalentTab from "./characterTabs/TalentTab";
+import {Button} from "antd";
 
 
 function TabPanel(props) {
@@ -52,7 +53,8 @@ function CharacterPage() {
     const [character,setCharacter] = useState()
     const [loading, setLoading]= useState(true)
     const [value, setValue] = React.useState(0);
-    const [value2, setValue2] = React.useState(0);
+    const [value2, setValue2] = React.useState(0,);
+    const [componentMounted,setComponentMounted] = useState(true);
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
@@ -73,9 +75,11 @@ function CharacterPage() {
             fetchCharacter();
 
         }
+        return() => {
+            setComponentMounted(false)
+        }
 
     })
-
 
     const fetchCharacter= async () => {
         const user = JSON.parse(localStorage.getItem('user'))
@@ -87,8 +91,11 @@ function CharacterPage() {
                     }
             })
         setLoading(false)
-        setCharacter(response.data)
+        if(componentMounted){
+            setCharacter(response.data)
+        }
     }
+
     return(
         <div className="characterContainer">
             <div className="Logo">
@@ -160,22 +167,25 @@ function CharacterPage() {
                                 </TabPanel>
                                 <TabPanel value={value} index={1}>
                                     {typeof character != "undefined" ?
-                                        <SkillTab characterSkillsSet={character.characterSkillsSet}/>
+                                        <SkillTab characterSkillsSet={character.characterSkillsSet} characterId={characterId}/>
                                         :
                                         <div/>
                                     }
                                 </TabPanel>
                                 <TabPanel value={value} index={2}>
                                     {typeof character != "undefined" ?
-                                        <TalentTab characterTalentsSet={character.characterTalentsSet}/>
+                                        <TalentTab characterTalentsSet={character.characterTalentsSet} characterId={characterId}/>
                                         :
                                         <div/>
                                     }
                                 </TabPanel>
                         </div>
+                        <div>
+                            <Button className="characterButton" onClick={()=>history.push("/home")} >Home</Button>
+                        </div>
                     </div>
                     :
-                    <div>
+                    <div className="characterHomeDiv">
                         Loading
                     </div>
                 }

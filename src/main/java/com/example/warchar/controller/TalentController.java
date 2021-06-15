@@ -4,6 +4,7 @@ import com.example.warchar.model.CharacterSkills;
 import com.example.warchar.model.CharacterTalents;
 import com.example.warchar.model.Skill;
 import com.example.warchar.model.Talent;
+import com.example.warchar.payload.CharacterDataChangeRequest;
 import com.example.warchar.payload.UpdateSkillTalent;
 import com.example.warchar.service.TalentService;
 import javassist.NotFoundException;
@@ -31,5 +32,10 @@ public class TalentController {
     @PatchMapping("/updateCharacterTalent")
     CharacterTalents updateCharacterTalent(@RequestBody UpdateSkillTalent request) throws NotFoundException {
         return talentService.updateCharacterTalent(request);
+    }
+
+    @PostMapping("/addCharacterTalent")
+    CharacterTalents addCharacterTalent(@RequestBody CharacterDataChangeRequest request) throws NotFoundException {
+        return talentService.addCharacterTalent(request);
     }
 }

@@ -11,6 +11,7 @@ export default function TrappingTab(props){
     const [characterId,setCharacterId] = useState(null)
     const [trapping, setTrapping] = useState()
     const [showAdd, setShowAdd] = useState(true)
+    const [componentMounted,setComponentMounted] = useState(true);
 
     if(props.trappingSet && trappingSet===null) {
         setTrappingSet(props.trappingSet)
@@ -22,6 +23,9 @@ export default function TrappingTab(props){
         {
             fetchTrapping();
         }
+        return() => {
+            setComponentMounted(false)
+        }
     })
 
     const fetchTrapping= async () => {
@@ -32,7 +36,9 @@ export default function TrappingTab(props){
                         Authorization:'Bearer '+ user.accessToken
                     }
             });
-        setTrapping(response.data)
+        if(componentMounted) {
+            setTrapping(response.data)
+        }
     }
 
     const remove = async (id)=> {

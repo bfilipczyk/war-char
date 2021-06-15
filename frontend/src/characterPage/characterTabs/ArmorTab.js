@@ -11,6 +11,7 @@ export default function ArmorTab(props){
     const [characterId,setCharacterId] = useState(null)
     const [armor, setArmor] = useState()
     const [showAdd, setShowAdd] = useState(true)
+    const [componentMounted,setComponentMounted] = useState(true);
 
     if(props.armorSet && armorSet===null) {
         setArmorSet(props.armorSet)
@@ -21,9 +22,10 @@ export default function ArmorTab(props){
         if(!armor && user!=null)
         {
             fetchArmor();
-
         }
-
+        return() => {
+            setComponentMounted(false)
+        }
     })
 
     const fetchArmor= async () => {
@@ -34,7 +36,9 @@ export default function ArmorTab(props){
                         Authorization:'Bearer '+ user.accessToken
                     }
             });
-        setArmor(response.data)
+        if(componentMounted) {
+            setArmor(response.data)
+        }
     }
 
     const remove = async (id)=> {
